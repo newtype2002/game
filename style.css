@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --primary-color: #00aaff;
+    --correct-color: #00ff7f;
+    --wrong-color: #ff4d4d;
+    --font-mono: 'Roboto Mono', monospace;
+    --font-sans: 'Noto Sans JP', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+#game-container {
+    width: 90%;
+    max-width: 800px;
+    height: 90%;
+    max-height: 600px;
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.title {
+    font-family: var(--font-mono);
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+.subtitle {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-family: var(--font-sans);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Game Screen */
+#hud {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    padding: 0 40px;
+    font-family: var(--font-mono);
+    font-size: 1.8rem;
+}
+
+#time-bar-container {
+    width: 200px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--primary-color);
+}
+
+#time-bar {
+    width: 100%;
+    height: 100%;
+    background-color: var(--correct-color);
+    border-radius: 8px;
+    transition: width 0.5s linear;
+}
+
+#problem-area {
+    margin-top: 60px; /* Adjust for HUD */
+}
+
+#problem {
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    letter-spacing: 0.1em;
+}
+
+#answer-input {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    border-bottom: 3px solid var(--text-color);
+    font-family: var(--font-mono);
+    font-size: 4rem;
+    width: 300px;
+    text-align: center;
+    outline: none;
+    padding: 10px;
+}
+
+#answer-input:focus {
+    border-bottom-color: var(--primary-color);
+}
+
+#feedback {
+    position: absolute;
+    font-size: 10rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#feedback.correct {
+    color: var(--correct-color);
+    opacity: 1;
+}
+
+#feedback.wrong {
+    color: var(--wrong-color);
+    opacity: 1;
+}
+
+/* Countdown Overlay */
+#countdown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#countdown-text {
+    font-family: var(--font-mono);
+    font-size: 15rem;
+    color: var(--primary-color);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: countdown-animation 1s ease-in-out forwards;
+}
+
+@keyframes countdown-animation {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+
+/* Result Screen */
+#result-screen {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 50px;
+}
+
+.result-main {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-text {
+    font-size: 3rem;
+    font-family: var(--font-mono);
+    margin-bottom: 20px;
+}
+
+#ranking-area {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.ranking-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+#ranking-list {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    font-family: var(--font-mono);
+}
+
+#ranking-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#ranking-list li:nth-child(odd) {
+    background-color: #2a2a2a;
+}
+
+#register-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#player-name {
+    background-color: #333;
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+#register-button, #retry-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+
+/* Calendar */
+.calendar-container {
+    width: 45%;
+    border-left: 2px solid var(--primary-color);
+    padding-left: 20px;
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#calendar-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+#calendar-header button {
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    background-color: #2a2a2a;
+    padding: 8px;
+    border-radius: 5px;
+    min-height: 80px;
+    font-size: 0.9rem;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+}
+
+.calendar-day .day-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.calendar-day .rank-info {
+    font-size: 0.8rem;
+    color: var(--correct-color);
+}

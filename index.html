@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算ラッシュ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- タイトル画面 -->
+        <div id="title-screen" class="screen active">
+            <h1 class="title">計算ラッシュ</h1>
+            <button id="start-button" class="btn">スタート</button>
+        </div>
+
+        <!-- 難易度選択画面 -->
+        <div id="difficulty-screen" class="screen">
+            <h2 class="subtitle">難易度を選んでください</h2>
+            <button class="btn difficulty-btn" data-difficulty="easy">かんたん (1桁の足し算)</button>
+            <button class="btn difficulty-btn" data-difficulty="normal">ふつう (2桁の足し算)</button>
+            <button class="btn difficulty-btn" data-difficulty="hard">むずかしい (1桁の掛け算)</button>
+        </div>
+
+        <!-- ゲーム画面 -->
+        <div id="game-screen" class="screen">
+            <div id="hud">
+                <div class="hud-item">
+                    <span>TIME</span>
+                    <div id="time-bar-container">
+                        <div id="time-bar"></div>
+                    </div>
+                </div>
+                <div class="hud-item">
+                    <span>SCORE</span>
+                    <span id="score">0</span>
+                </div>
+            </div>
+            <div id="problem-area">
+                <p id="problem"></p>
+                <input type="tel" id="answer-input" autocomplete="off">
+            </div>
+            <div id="feedback"></div>
+            <div id="countdown-overlay">
+                <span id="countdown-text"></span>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="result-screen" class="screen">
+            <div class="result-main">
+                <h2 class="subtitle">結果</h2>
+                <p class="result-text">SCORE: <span id="final-score">0</span></p>
+                <div id="ranking-area">
+                    <h3 class="ranking-title">本日のランキング</h3>
+                    <ol id="ranking-list"></ol>
+                </div>
+                <div id="register-form">
+                    <input type="text" id="player-name" placeholder="名前を入力 (10文字以内)" maxlength="10">
+                    <button id="register-button" class="btn">ランキングに登録</button>
+                </div>
+                <button id="retry-button" class="btn">もう一度プレイ</button>
+            </div>
+            <div class="calendar-container">
+                <div id="calendar-header">
+                    <button id="prev-month-btn">&lt;</button>
+                    <h3 id="calendar-month-year"></h3>
+                    <button id="next-month-btn">&gt;</button>
+                </div>
+                <div id="calendar-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="typing-sound" src="https://soundbible.com/grab.php?id=1335&type=mp3" preload="auto"></audio>
+    <audio id="correct-sound" src="https://soundbible.com/grab.php?id=2190&type=mp3" preload="auto"></audio>
+    <audio id="wrong-sound" src="https://soundbible.com/grab.php?id=1549&type=mp3" preload="auto"></audio>
+    <audio id="bgm-sound" src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Offenbach%20-%20Can%20Can.mp3" loop preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
